@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.generateurid">
+
+
+	<class name="GeneratedId" table="${project.parent.artifactId}_generatedId">
+		<id name="generatedidId" type="int" column="generatedid_id"	unsaved-value="0">
+			<generator class="native" />
+		</id>
+
+		<property name="patientIdentifiant" type="java.lang.String"	column="patient_identifiant"  unique="true" />
+		<property name="attributed" type="java.lang.Boolean" column="attributed" />
+		<property name="dateCreated" type="java.util.Date" column="date_created"  />
+		<property name="dateChanged" type="java.util.Date" column="date_changed" />
+		<property name="retired" type="java.lang.Boolean" column="retired" not-null="true"/>
+		<property name="dateRetired" type="java.util.Date" column="date_retired" />
+		<property name="retireReason" type="java.lang.String" column="retire_reason" />
+				
+		<many-to-one name="creator" class="org.openmrs.User" column="creator" />
+  	    <many-to-one name="retiredBy" class="org.openmrs.User" column="retired_by" />
+  	    <many-to-one name="changedBy" class="org.openmrs.User" column="changed_by" />
+
+	</class>
+
+
+</hibernate-mapping>
