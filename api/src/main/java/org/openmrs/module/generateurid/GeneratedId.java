@@ -40,6 +40,17 @@ public class GeneratedId implements Serializable {
 	private User retiredBy;
 	private User changedBy;
 
+	/* Constructor to instantiate this object */
+	public GeneratedId(String patientIdentifiant, Boolean attributed,
+			Date dateCreated, Boolean retired, User creator) {
+		super();
+		this.patientIdentifiant = patientIdentifiant;
+		this.attributed = attributed;
+		this.dateCreated = dateCreated;
+		this.retired = retired;
+		this.creator = creator;
+	}
+
 	public Integer getGeneratedidId() {
 		return generatedidId;
 	}
