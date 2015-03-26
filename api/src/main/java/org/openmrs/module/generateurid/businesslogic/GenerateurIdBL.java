@@ -36,11 +36,10 @@ public class GenerateurIdBL {
 	 */
 	private static int getNumOfDigit(int num) {
 
-		int number = 56234;
-		int length = (int) Math.log10(number) + 1;
+		int length = (int) Math.log10(num) + 1;
 		System.out.println(length);
 
-		return number;
+		return num;
 	}
 
 	/**
