@@ -44,24 +44,24 @@ public class  GenerateuridManageController {
 	@RequestMapping(value = "/module/generateurid/generateId")
 	public void viewGenerateId(ModelMap model) {
 		
-		Integer locId = 1; //Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
+		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		model.addAttribute("location", Context.getLocationService().getLocation(locId));
 		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear());
 		
 	}
 	
 	@RequestMapping(value = "/module/generateurid/generateIdForm")
-	public String generateId(
+	public void generateId(
             @RequestParam(required=false, value="locationId") Integer locationId,
             @RequestParam(required=false, value="currentYear") String currentYear,
             @RequestParam(required=true, value="numToGenerate") Integer numToGenerate,
             HttpSession session) {
 		
-		Integer locId = 1;
+		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
 		
 		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
 		
-		return "/module/generateurid/generateIdForm";
+//		return "/module/generateurid/generateIdForm";
 	}
 }
