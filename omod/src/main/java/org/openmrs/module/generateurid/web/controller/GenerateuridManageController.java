@@ -16,21 +16,37 @@ package org.openmrs.module.generateurid.web.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.generateurid.metier.FormulaireGenerateId;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 //import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * The main controller.
  */
 @Controller
-public class  GenerateuridManageController {
-	
+public class GenerateuridManageController {
+
 	protected final Log log = LogFactory.getLog(getClass());
-	
+	FormulaireGenerateId formlocation = new FormulaireGenerateId();
+
 	@RequestMapping(value = "/module/generateurid/manage")
 	public void manage(ModelMap model) {
 		model.addAttribute("user", Context.getAuthenticatedUser());
+		model.addAttribute("locationparam", formlocation);
+		model.addAttribute("locations", Context.getLocationService()
+				.getAllLocations());
+	}
+
+	@RequestMapping(value = "/module/generateurid/add", method = RequestMethod.POST)
+	public String addContact(@ModelAttribute("contact") FormulaireGenerateId formGenerate,
+			BindingResult result) {
+
+		return "redirect:/module/generateurid/manage";
 	}
 }
