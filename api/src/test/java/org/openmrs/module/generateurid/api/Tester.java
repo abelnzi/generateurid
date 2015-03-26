@@ -20,6 +20,20 @@ public class Tester {
 		DateFormat date = new SimpleDateFormat("yyyy");
 		String year = date.format(now);
 		System.out.println(year);
+		
+		/** Testing the digit prefix of ZEROs */
+		System.out.println(getZeroPrefix(1));
+		
+	}
+	
+	static String getZeroPrefix(int numDigit) {
+
+		String prefix = "";
+		
+		for (int i = 1; i <= 5-numDigit; i++) {
+			prefix += "0";
+		}
+		return prefix;
 	}
 
 }

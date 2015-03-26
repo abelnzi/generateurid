@@ -36,11 +36,24 @@ public class GenerateurIdBL {
 	 */
 	private static int getNumOfDigit(int num) {
 
-		int number = 56234;
-		int length = (int) Math.log10(number) + 1;
+		int length = (int) Math.log10(num) + 1;
 		System.out.println(length);
 
-		return number;
+		return num;
+	}
+	
+	/**
+	 * @param numDigit
+	 * @return
+	 */
+	private static String getZeroPrefix(int numDigit) {
+
+		String prefix = "";
+		
+		for (int i = 1; i <= 5-numDigit; i++) {
+			prefix += "0";
+		}
+		return prefix;
 	}
 
 	/**
@@ -69,44 +82,14 @@ public class GenerateurIdBL {
 
 				for (int i = 1; i >= numberToGenerate; i++) {
 					if (getNumOfDigit(i) == 1) {
-						String patientIdentifiant = prefix + "0000" + i;
+						String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(i)) + i;
 						getService().saveGeneratedId(
 								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
+										new Date(), false, Context.getAuthenticatedUser()));
 					}
-					if (getNumOfDigit(i) == 2) {
-						String patientIdentifiant = prefix + "000" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 3) {
-						String patientIdentifiant = prefix + "00" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 4) {
-						String patientIdentifiant = prefix + "0" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 5) {
-						String patientIdentifiant = prefix + "" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					} else
-						break;
 				}
 			}else{
-				
+				/** Here comes the code for when it exists */
 			}
 		}
 	}

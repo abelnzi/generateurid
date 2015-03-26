@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 =======
 .idea
+.settings/
 .settings
 *.iml
 .DS_Store
