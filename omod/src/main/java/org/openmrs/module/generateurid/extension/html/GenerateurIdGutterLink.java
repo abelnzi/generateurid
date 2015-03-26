@@ -40,7 +40,7 @@ public class GenerateurIdGutterLink extends LinkExt {
 	 */
 	@Override
 	public String getUrl() {
-		return "module/generateurid/manage.form";
+		return "module/generateurid/generateId.form";
 	}
 
 }
