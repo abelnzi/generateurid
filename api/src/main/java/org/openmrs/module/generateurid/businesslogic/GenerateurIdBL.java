@@ -41,6 +41,20 @@ public class GenerateurIdBL {
 
 		return num;
 	}
+	
+	/**
+	 * @param numDigit
+	 * @return
+	 */
+	private static String getZeroPrefix(int numDigit) {
+
+		String prefix = "";
+		
+		for (int i = 1; i <= 5-numDigit; i++) {
+			prefix += "0";
+		}
+		return prefix;
+	}
 
 	/**
 	 * Generates automatically the IDs
@@ -68,35 +82,7 @@ public class GenerateurIdBL {
 
 				for (int i = 1; i >= numberToGenerate; i++) {
 					if (getNumOfDigit(i) == 1) {
-						String patientIdentifiant = prefix + "0000" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 2) {
-						String patientIdentifiant = prefix + "000" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 3) {
-						String patientIdentifiant = prefix + "00" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 4) {
-						String patientIdentifiant = prefix + "0" + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					}
-					if (getNumOfDigit(i) == 5) {
-						String patientIdentifiant = prefix + "" + i;
+						String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(i)) + i;
 						getService().saveGeneratedId(
 								new GeneratedId(patientIdentifiant, false,
 										new Date(), false, Context
@@ -105,7 +91,7 @@ public class GenerateurIdBL {
 						break;
 				}
 			}else{
-				
+				/** Here comes the code for when it exists */
 			}
 		}
 	}
