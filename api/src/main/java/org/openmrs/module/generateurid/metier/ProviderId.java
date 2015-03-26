@@ -8,6 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.openmrs.api.context.Context;
+import org.openmrs.module.generateurid.api.GeneratedIdService;
+
 /**
  * @author Abel
  *
@@ -17,6 +20,7 @@ public class ProviderId {
 
 	public ArrayList<String> provideIdList(int locationId, int nbreId,
 			int lastGeneratedId) {
+		GeneratedIdService service=Context.getService(GeneratedIdService.class);
 		// recupérer la date courante
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(new Date());
