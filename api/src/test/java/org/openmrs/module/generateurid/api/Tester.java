@@ -12,7 +12,7 @@ public class Tester {
 		 * 
 		 * http://stackoverflow.com/questions/15587818/fastest-way-to-get-number-of-digits-on-a-number
 		 */
-		int number = 56234;
+		int number = 00056234;
 		int length = (int) Math.log10(number) + 1;
 		System.out.println(length);
 		
@@ -24,6 +24,8 @@ public class Tester {
 		/** Testing the digit prefix of ZEROs */
 		System.out.println(getZeroPrefix(1));
 		
+		System.out.println(incrementFromNum(1234, 10));
+		
 	}
 	
 	static String getZeroPrefix(int numDigit) {
@@ -34,6 +36,16 @@ public class Tester {
 			prefix += "0";
 		}
 		return prefix;
+	}
+	
+	static int incrementFromNum(int num, int incrementNum){
+		
+		for(int i = 0; i < incrementNum; i++){
+			num += 1;
+			System.out.println(num);// Save in DB
+		}
+		
+		return num;
 	}
 
 }

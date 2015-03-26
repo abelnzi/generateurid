@@ -56,6 +56,19 @@ public class GenerateurIdBL {
 		return prefix;
 	}
 
+	
+	private static void incrementFromNum(String prefix, int num, int incrementNum){
+		
+		for(int i = 0; i < incrementNum; i++){
+			num += 1;
+			String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(num)) + num;
+			getService().saveGeneratedId(
+					new GeneratedId(patientIdentifiant, false,
+							new Date(), false, Context.getAuthenticatedUser()));
+		}
+	
+	}
+
 	/**
 	 * Generates automatically the IDs
 	 * 
@@ -80,16 +93,22 @@ public class GenerateurIdBL {
 
 			if (getLatestGeneratedId() == null) {
 
-				for (int i = 1; i >= numberToGenerate; i++) {
-					if (getNumOfDigit(i) == 1) {
-						String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(i)) + i;
-						getService().saveGeneratedId(
-								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context.getAuthenticatedUser()));
-					}
-				}
+				incrementFromNum(prefix, 0, numberToGenerate);
 			}else{
-				/** Here comes the code for when it exists */
+				/** Here comes the code when it already exists */
+				String latestId = getLatestGeneratedId().getPatientIdentifiant();
+				String[] splitIds = latestId.split("/");
+				String locCode = splitIds[0]+"/"+splitIds[1];
+				String currYear = splitIds[2];
+				Integer latestPatientCode = Integer.parseInt(splitIds[3]);
+				
+				if(getCurrentYear().equals(currYear) && locationCode.equals(locCode)){
+					prefix = locCode + "/" + currYear + "/";
+					incrementFromNum(prefix, latestPatientCode, numberToGenerate);
+				}else{ // We start from 0 for the current year...
+					prefix = locCode + "/" + getCurrentYear() + "/";
+					incrementFromNum(prefix, 0, numberToGenerate);	
+				}
 			}
 		}
 	}
