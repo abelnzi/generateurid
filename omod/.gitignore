@@ -1,4 +1,6 @@
 /target/
-*/target/*
-*/target/
-/target/*
+.idea
+.settings
+*.iml
+.DS_Store
+target/
