@@ -110,4 +110,15 @@ public class GeneratedIdServiceImpl implements GeneratedIdService {
 
 		getDao().updateGeneratedId(generatedId);
 	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmrs.module.generateurid.api.GeneratedIdService#getLatestGeneratedId()
+	 */
+	@Override
+	public GeneratedId getLatestGeneratedId() {
+
+		return getDao().getLatestGeneratedId();
+	}
 }

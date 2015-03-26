@@ -77,4 +77,11 @@ public interface GeneratedIdService {
 	 */
 	public void updateGeneratedId(GeneratedId generatedId);
 
+	/**
+	 * Returns the very latest GeneratedId
+	 * 
+	 * @return latest GeneratedId in DB
+	 */
+	public GeneratedId getLatestGeneratedId();
+
 }

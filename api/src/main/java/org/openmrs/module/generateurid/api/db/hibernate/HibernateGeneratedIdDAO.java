@@ -118,4 +118,18 @@ public class HibernateGeneratedIdDAO implements GeneratedIdDAO {
 
 		getSessionFactory().getCurrentSession().update(generatedId);
 	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmrs.module.generateurid.api.db.GeneratedIdDAO#getLatestGeneratedId()
+	 */
+	@Override
+	public GeneratedId getLatestGeneratedId() {
+
+		return (GeneratedId) getSessionFactory().getCurrentSession()
+				.createCriteria(GeneratedId.class)
+				.add(Restrictions.eq("retired", false)).setMaxResults(1)
+				.uniqueResult();
+	}
 }
