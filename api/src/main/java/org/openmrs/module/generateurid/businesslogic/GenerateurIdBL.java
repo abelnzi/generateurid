@@ -85,10 +85,8 @@ public class GenerateurIdBL {
 						String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(i)) + i;
 						getService().saveGeneratedId(
 								new GeneratedId(patientIdentifiant, false,
-										new Date(), false, Context
-												.getAuthenticatedUser()));
-					} else
-						break;
+										new Date(), false, Context.getAuthenticatedUser()));
+					}
 				}
 			}else{
 				/** Here comes the code for when it exists */
