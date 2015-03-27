@@ -19,7 +19,7 @@ import org.openmrs.module.generateurid.GeneratedId;
 import org.openmrs.module.generateurid.api.GeneratedIdService;
 
 /**
- *  Database methods for {@link GeneratedIdService}.
+ * Database methods for {@link GeneratedIdService}.
  */
 public interface GeneratedIdDAO {
 
@@ -67,5 +67,12 @@ public interface GeneratedIdDAO {
 	 *            the object to edit
 	 */
 	public void updateGeneratedId(GeneratedId generatedId);
-	
+
+	/**
+	 * Returns the very latest GeneratedId
+	 * 
+	 * @return latest GeneratedId in DB
+	 */
+	public GeneratedId getLatestGeneratedId();
+
 }

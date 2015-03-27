@@ -46,6 +46,15 @@
 		<name>Manage Generateur ID</name>
 		<description>Can Manage Generateur IDs for SIGDEP-2</description>
 	</privilege>
+	
+	<!-- Global Properties list -->
+	<globalProperty>
+		<property>generateurid.defaultLocation</property>
+		<defaultValue>1</defaultValue>
+		<description>
+			The Default Location to be used when generating the Patient IDs
+		</description>
+	</globalProperty>
 
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->

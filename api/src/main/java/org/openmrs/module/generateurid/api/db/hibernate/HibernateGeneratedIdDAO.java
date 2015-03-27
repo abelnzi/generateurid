@@ -18,6 +18,7 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.generateurid.GeneratedId;
 import org.openmrs.module.generateurid.api.db.GeneratedIdDAO;
@@ -117,5 +118,20 @@ public class HibernateGeneratedIdDAO implements GeneratedIdDAO {
 	public void updateGeneratedId(GeneratedId generatedId) {
 
 		getSessionFactory().getCurrentSession().update(generatedId);
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.openmrs.module.generateurid.api.db.GeneratedIdDAO#getLatestGeneratedId()
+	 */
+	@Override
+	public GeneratedId getLatestGeneratedId() {
+
+		return (GeneratedId) getSessionFactory().getCurrentSession()
+				.createCriteria(GeneratedId.class)
+				.add(Restrictions.eq("retired", false))
+				.addOrder(Order.desc("generatedidId")).setMaxResults(1)
+				.uniqueResult();
 	}
 }

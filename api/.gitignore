@@ -1,4 +1,5 @@
 /target/
+<<<<<<< HEAD
 # Eclipse
 .classpath
 .project
@@ -21,3 +22,11 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 /target
+=======
+.idea
+.settings/
+.settings
+*.iml
+.DS_Store
+target/
+>>>>>>> v-1.0.0

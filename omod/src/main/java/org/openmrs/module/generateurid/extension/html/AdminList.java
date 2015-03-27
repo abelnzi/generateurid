@@ -44,7 +44,14 @@ public class AdminList extends AdministrationSectionExt {
 	 */
 	public Map<String, String> getLinks() {
 		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+<<<<<<< HEAD
 		map.put("/module/generateurid/manage.form", "generateurid..generate.gutterlink");
+=======
+		
+		map.put("/module/generateurid/generateIds.form", "generateurid.generate.gutterlink");
+		map.put("/module/generateurid/manage.form", "generateurid.manage");
+		
+>>>>>>> v-1.0.0
 		return map;
 	}
 	
