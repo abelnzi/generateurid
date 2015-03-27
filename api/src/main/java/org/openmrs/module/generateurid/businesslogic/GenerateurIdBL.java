@@ -36,10 +36,7 @@ public class GenerateurIdBL {
 	 */
 	private static int getNumOfDigit(int num) {
 
-		int length = (int) Math.log10(num) + 1;
-		System.out.println(length);
-
-		return num;
+		return (int) Math.log10(num) + 1;
 	}
 	
 	/**
@@ -61,7 +58,8 @@ public class GenerateurIdBL {
 		
 		for(int i = 0; i < incrementNum; i++){
 			num += 1;
-			String patientIdentifiant = prefix + getZeroPrefix(getNumOfDigit(num)) + num;
+			String patientIdentifiant = prefix.concat(getZeroPrefix(getNumOfDigit(num))) + num;
+			
 			getService().saveGeneratedId(
 					new GeneratedId(patientIdentifiant, false,
 							new Date(), false, Context.getAuthenticatedUser()));
@@ -130,7 +128,7 @@ public class GenerateurIdBL {
 	public static String getCurrentYear() {
 
 		Date now = new Date();
-		DateFormat date = new SimpleDateFormat("yyyy");
+		DateFormat date = new SimpleDateFormat("yy");
 		String year = date.format(now);
 
 		return year;

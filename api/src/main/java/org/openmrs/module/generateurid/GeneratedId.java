@@ -40,6 +40,8 @@ public class GeneratedId implements Serializable {
 	private User retiredBy;
 	private User changedBy;
 
+	public GeneratedId(){};
+	
 	/* Constructor to instantiate this object */
 	public GeneratedId(String patientIdentifiant, Boolean attributed,
 			Date dateCreated, Boolean retired, User creator) {

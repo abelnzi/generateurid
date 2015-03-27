@@ -12,19 +12,13 @@ public class Tester {
 		 * 
 		 * http://stackoverflow.com/questions/15587818/fastest-way-to-get-number-of-digits-on-a-number
 		 */
-		int number = 00056234;
-		int length = (int) Math.log10(number) + 1;
-		System.out.println(length);
 		
-		Date now = new Date();
-		DateFormat date = new SimpleDateFormat("yyyy");
-		String year = date.format(now);
-		System.out.println(year);
+		System.out.println("2334/34/".concat(getZeroPrefix(getNumOfDigit(234))) + 234);
 		
 		/** Testing the digit prefix of ZEROs */
-		System.out.println(getZeroPrefix(1));
+		System.out.println(getNumOfDigit(234));
 		
-		System.out.println(incrementFromNum(1234, 10));
+		System.out.println(getZeroPrefix(3));
 		
 	}
 	
@@ -33,7 +27,8 @@ public class Tester {
 		String prefix = "";
 		
 		for (int i = 1; i <= 5-numDigit; i++) {
-			prefix += "0";
+			prefix = prefix.concat("0");
+//			System.out.println(prefix + " My Prefix");
 		}
 		return prefix;
 	}
@@ -46,6 +41,21 @@ public class Tester {
 		}
 		
 		return num;
+	}
+	
+	private static int getNumOfDigit(int num) {
+
+		return (int) Math.log10(num) + 1;
+
+	}
+
+	public static String getCurrentYear() {
+
+		Date now = new Date();
+		DateFormat date = new SimpleDateFormat("yy");
+		String year = date.format(now);
+
+		return year;
 	}
 
 }

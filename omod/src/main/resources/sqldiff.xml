@@ -14,7 +14,7 @@
 	</help>
 
 	<diff>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0.2</version>
 		<author>Abel N'ZI</author>
 		<date></date>
 		<description></description>
@@ -25,10 +25,10 @@
 			  `attributed` bool NULL,
 			  `creator` int(11) NOT NULL,
 			  `date_created` datetime NOT NULL,
-			  `changed_by` int(11) default NULL,
-			  `date_changed` datetime default NULL,
+			  `changed_by` int(11) DEFAULT NULL,
+			  `date_changed` datetime DEFAULT NULL,
 			  `retired` tinyint(1) NOT NULL DEFAULT '0',
-			  `date_retired` datetime NOT NULL,
+			  `date_retired` datetime DEFAULT NULL,
 			  `retire_reason` text DEFAULT NULL,
 			  `retired_by` int(11) DEFAULT NULL,
 			
@@ -38,7 +38,7 @@
 			 CONSTRAINT `user_who_changed_generateurid_generatedid` FOREIGN KEY (`changed_by`) REFERENCES `users` (`user_id`),
 			 CONSTRAINT `user_who_retired_generateurid_generatedid` FOREIGN KEY (`retired_by`) REFERENCES `users` (`user_id`)
 			  
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
 
 			
