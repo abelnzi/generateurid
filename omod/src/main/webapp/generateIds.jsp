@@ -1,17 +1,16 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <%@ include file="template/localHeader.jsp"%>
 
-<form action="/module/generateurid/generateIdForm.form" method="post">
+<form action="${pageContext.request.contextPath}/module/generateurid/generateIds.form" method="post">
 	<table>
 	  <tr>
-	    <th>Location</th>
+	    <th><spring:message code="Location.title" /></th>
 	    <th><spring:message code="generateurid.current.year" /></th>
 	  </tr>
 	  <tr>
-	    <td>${location.name}-${location.postalCode}</td>
+	    <td>${location.name}-<b>${location.postalCode}</b></td>
 	    <td>${currentYear}</td>
 	  </tr>
 	  <tr>

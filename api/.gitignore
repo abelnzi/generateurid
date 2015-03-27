@@ -1,10 +1,16 @@
 /target/
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 807adc7d45151da2f7053964928d07f18269d39f
 .idea
 .settings/
 .settings
 *.iml
 .DS_Store
 target/
+<<<<<<< HEAD
 >>>>>>> 42fa3c6d779bf30b3ebfc761f7359e75f64b6a14
+=======
+>>>>>>> 807adc7d45151da2f7053964928d07f18269d39f
