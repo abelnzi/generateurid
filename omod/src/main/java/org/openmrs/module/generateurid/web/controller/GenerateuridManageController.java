@@ -47,12 +47,13 @@ public class GenerateuridManageController {
 	@RequestMapping(method=RequestMethod.POST)
 	public String generateId(
             @RequestParam(required=true, value="numToGenerate") Integer numToGenerate,
-            HttpSession session) {
+            HttpSession session, ModelMap model) {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
 		
 		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
+		model.addAttribute("listIds", GenerateurIdBL.getGeneratedIdsByPeriod(null, null));
 		
 		return "/module/generateurid/generateIds";
 	}
