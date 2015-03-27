@@ -25,4 +25,27 @@
 	</table>
 </form>
 
+<c:if test="${not empty listIds}">
+	<b class="boxHeader">Generated IDs<span style="float:right;"><a href="${pageContext.request.contextPath}/module/generateurid/printOutIds.form">Print the out</a></span></b>
+	<div class="box">
+		<table>
+		  <tr>
+		    <th>#</th>
+		    <th>Generated IDs</th>
+		    <th>Creator</th>
+		    <th>Creation date</th>
+		  </tr>
+		  <c:forEach var="genId" items="${listIds}" varStatus="status">
+			  <tr>
+			    <td><b>${status.count}.</b></td>
+			    <td>${genId.patientIdentifiant}</td>
+			    <td>${genId.creator.person.familyName}</td>
+			    <td><openmrs:formatDate date="${genId.dateCreated}" type="medium"/></td>
+			  </tr>
+		  </c:forEach>
+		</table>
+	</div>
+</c:if>
+
+
 <%@ include file="/WEB-INF/template/footer.jsp"%>
