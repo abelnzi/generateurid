@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.openmrs.module.generateurid.api.GeneratedIdServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.735 sec
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.695 sec

@@ -3,10 +3,8 @@
 
 <%@ include file="template/localHeader.jsp"%>
 
-<p>Hello ${user.systemId}!</p>
 
-<form:form method="POST" commandName="locationparam" action="/module/generateurid/add.form">
-
+<<<<<<< HEAD
 	<form:select path="idLocation">
 		<form:option value="">Select Location</form:option>
 		<c:forEach items="${locations}" var="location">
@@ -15,5 +13,9 @@
 	</form:select>
 
 </form:form>
+=======
+<p>Hello ${user.systemId}!</p>
+
+>>>>>>> 807adc7d45151da2f7053964928d07f18269d39f
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
