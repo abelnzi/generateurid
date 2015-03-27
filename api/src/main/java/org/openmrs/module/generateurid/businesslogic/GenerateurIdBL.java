@@ -5,6 +5,7 @@ package org.openmrs.module.generateurid.businesslogic;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import org.openmrs.Location;
@@ -52,7 +53,6 @@ public class GenerateurIdBL {
 		}
 		return prefix;
 	}
-
 	
 	private static void incrementFromNum(String prefix, int num, int incrementNum){
 		
@@ -133,4 +133,13 @@ public class GenerateurIdBL {
 
 		return year;
 	}
+
+	public static Collection<GeneratedId> getGeneratedIdsByPeriod(Date startDate, Date endDate){
+		
+		//TODO: Must do this...
+		Collection<GeneratedId> listIds = getService().getAllGeneratedIds();
+		
+		return listIds;
+	}
+	
 }
