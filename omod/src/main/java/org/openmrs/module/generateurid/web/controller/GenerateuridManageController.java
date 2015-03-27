@@ -25,6 +25,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The main controller.
@@ -56,6 +57,18 @@ public class GenerateuridManageController {
 		model.addAttribute("listIds", GenerateurIdBL.getGeneratedIdsByPeriod(null, null));
 		
 		return "/module/generateurid/generateIds";
+	}
+	
+	public ModelAndView printOutIds(
+            @RequestParam(required=true, value="printIds") String printIds,
+            HttpSession session, ModelMap model) throws Exception {
+
+		ModelAndView mav = new ModelAndView("allGeneratedIdsInPDF");
+		
+		if(printIds != null)
+			mav.addObject("generatedIds", GenerateurIdBL.getLatestGeneratedId());
+
+		return mav;
 	}
 	
 }

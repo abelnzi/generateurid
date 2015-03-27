@@ -26,7 +26,11 @@
 </form>
 
 <c:if test="${not empty listIds}">
-	<b class="boxHeader">Generated IDs<span style="float:right;"><a href="${pageContext.request.contextPath}/module/generateurid/printOutIds.form">Print the out</a></span></b>
+	<b class="boxHeader">
+		Generated IDs<span style="float:right;">
+			<a href="${pageContext.request.contextPath}/module/generateurid/generateIds.form?printIds=true">Print the out</a>
+		</span>
+	</b>
 	<div class="box">
 		<table>
 		  <tr>
