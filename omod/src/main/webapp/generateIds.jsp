@@ -2,6 +2,18 @@
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
 <%@ include file="template/localHeader.jsp"%>
+<!-- openmrs:htmlInclude file="/moduleResources/@MODULE_ID@/scripts/jquery.PrintArea.js" / -->
+<openmrs:htmlInclude file="/moduleResources/generateurid/scripts/jquery.PrintArea.js" />
+
+<script>
+
+//var $sig = jQuery.noConflict();
+
+$j("#print_button").click(function(){
+	$j("#printGeneratedIDs").printArea();
+});
+
+</script>
 
 <form action="${pageContext.request.contextPath}/module/generateurid/generateIds.form" method="post">
 	<table>
@@ -28,23 +40,21 @@
 <c:if test="${not empty listIds}">
 	<b class="boxHeader">
 		Generated IDs<span style="float:right;">
-			<a href="${pageContext.request.contextPath}/module/generateurid/generateIds.form?printIds=true">Print the out</a>
+			<!-- a href="${pageContext.request.contextPath}/module/generateurid/generateIds.form?printIds=true">Print the out</a -->
+			<!-- a href="javascript:printDiv('printGeneratedIDs')">Print the out</a -->
+			<input id="print_button" value="Printout IDs" type="button" />
 		</span>
 	</b>
-	<div class="box">
+	<div id="printGeneratedIDs" class="box">
 		<table>
 		  <tr>
 		    <th>#</th>
 		    <th>Generated IDs</th>
-		    <th>Creator</th>
-		    <th>Creation date</th>
 		  </tr>
 		  <c:forEach var="genId" items="${listIds}" varStatus="status">
 			  <tr>
 			    <td><b>${status.count}.</b></td>
-			    <td>${genId.patientIdentifiant}</td>
-			    <td>${genId.creator.person.familyName}</td>
-			    <td><openmrs:formatDate date="${genId.dateCreated}" type="medium"/></td>
+			    <td>${genId}</td>
 			  </tr>
 		  </c:forEach>
 		</table>
