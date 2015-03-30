@@ -13,6 +13,8 @@
  */
 package org.openmrs.module.generateurid.web.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -41,22 +43,23 @@ public class GenerateuridManageController {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		model.addAttribute("location", Context.getLocationService().getLocation(locId));
-		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear());
+		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear("yyyy"));
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String generateId(
+	public void generateId(
             @RequestParam(required=true, value="numToGenerate") Integer numToGenerate,
             HttpSession session, ModelMap model) {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
 		
-//		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
 		model.addAttribute("listIds", GenerateurIdBL.autoGenerateIds(location, numToGenerate));
+		model.addAttribute("location", Context.getLocationService().getLocation(locId));
+		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear("yyyy"));
+		model.addAttribute("currentDate", new Date());
 		
-		return "/module/generateurid/generateIds";
 	}
 	
 	public ModelAndView printOutIds(

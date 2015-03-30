@@ -93,7 +93,7 @@ public class GenerateurIdBL {
 		 * '4alphanumeric/2alphanumeric'
 		 */
 		if (splitCodes.length >= 2) {
-			String year = getCurrentYear() + "";
+			String year = getCurrentYear(null) + "";
 			String prefix = splitCodes[0] + "/" + splitCodes[1] + "/" + year
 					+ "/";
 
@@ -101,6 +101,7 @@ public class GenerateurIdBL {
 
 				generatedIds = incrementFromNum(prefix, 0, numberToGenerate);
 			}else{
+				
 				/** Here comes the code when it already exists */
 				String latestId = getLatestGeneratedId().getPatientIdentifiant();
 				String[] splitIds = latestId.split("/");
@@ -108,11 +109,11 @@ public class GenerateurIdBL {
 				String currYear = splitIds[2];
 				Integer latestPatientCode = Integer.parseInt(splitIds[3]);
 				
-				if(getCurrentYear().equals(currYear) && locationCode.equals(locCode)){
+				if(getCurrentYear(null).equals(currYear) && locationCode.equals(locCode)){
 					prefix = locCode + "/" + currYear + "/";
 					generatedIds = incrementFromNum(prefix, latestPatientCode, numberToGenerate);
 				}else{ // We start from 0 for the current year...
-					prefix = locCode + "/" + getCurrentYear() + "/";
+					prefix = locCode + "/" + getCurrentYear(null) + "/";
 					generatedIds = incrementFromNum(prefix, 0, numberToGenerate);	
 				}
 			}
@@ -135,10 +136,11 @@ public class GenerateurIdBL {
 	 * 
 	 * @return
 	 */
-	public static String getCurrentYear() {
+	public static String getCurrentYear(String format) {
 
 		Date now = new Date();
-		DateFormat date = new SimpleDateFormat("yy");
+		DateFormat date = null;
+		date = (format == null)?new SimpleDateFormat("yy"):new SimpleDateFormat(format);
 		String year = date.format(now);
 
 		return year;

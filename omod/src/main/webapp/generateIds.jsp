@@ -7,10 +7,12 @@
 
 <script>
 
-//var $sig = jQuery.noConflict();
+var $sig = jQuery.noConflict();
 
-$j("#print_button").click(function(){
-	$j("#printGeneratedIDs").printArea();
+$sig(document).ready(function(){
+	$sig("#print_button").click(function(){
+		$sig("#printGeneratedIDs").printArea();
+	});
 });
 
 </script>
@@ -40,24 +42,46 @@ $j("#print_button").click(function(){
 <c:if test="${not empty listIds}">
 	<b class="boxHeader">
 		Generated IDs<span style="float:right;">
-			<!-- a href="${pageContext.request.contextPath}/module/generateurid/generateIds.form?printIds=true">Print the out</a -->
-			<!-- a href="javascript:printDiv('printGeneratedIDs')">Print the out</a -->
-			<input id="print_button" value="Printout IDs" type="button" />
+			<!-- input id="print_button" value="Printout IDs" type="button" / -->
+			<input type="image" id="print_button" src="/moduleResources/generateurid/images/print_btn.png" alt="Printout IDs" />
 		</span>
 	</b>
 	<div id="printGeneratedIDs" class="box">
-		<table>
-		  <tr>
-		    <th>#</th>
-		    <th>Generated IDs</th>
-		  </tr>
-		  <c:forEach var="genId" items="${listIds}" varStatus="status">
+		<div style="text-align: center;">
+			<div style="float: left;">
+				<table>
+					<tr>
+						<td>SITE: </td>
+						<td><b>${location.name}</b></td>
+						<td>CODE:</td>
+						<td><b>${location.postalCode}</b></td>
+					</tr>
+				</table>
+			</div>
+			<div style="float: right;">
+				<table>
+					<tr>
+						<td>Printed on:</td>
+						<td><b><openmrs:formatDate date="${currentDate}" type="medium"/></b></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br/><hr/>
+		<div style="clear: both;">
+			<table>
 			  <tr>
-			    <td><b>${status.count}.</b></td>
-			    <td>${genId}</td>
+			    <th>#</th>
+			    <th>Generated IDs</th>
 			  </tr>
-		  </c:forEach>
-		</table>
+			  <c:forEach var="genId" items="${listIds}" varStatus="status">
+				  <tr>
+				    <td><b>${status.count}.</b></td>
+				    <td>${genId}</td>
+				  </tr>
+			  </c:forEach>
+			</table>
+		</div>
 	</div>
 </c:if>
 
