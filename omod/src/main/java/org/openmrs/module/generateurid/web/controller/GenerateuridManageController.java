@@ -53,8 +53,8 @@ public class GenerateuridManageController {
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
 		
-		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
-		model.addAttribute("listIds", GenerateurIdBL.getGeneratedIdsByPeriod(null, null));
+//		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
+		model.addAttribute("listIds", GenerateurIdBL.autoGenerateIds(location, numToGenerate));
 		
 		return "/module/generateurid/generateIds";
 	}

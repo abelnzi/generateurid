@@ -5,8 +5,10 @@ package org.openmrs.module.generateurid.businesslogic;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
@@ -54,7 +56,9 @@ public class GenerateurIdBL {
 		return prefix;
 	}
 	
-	private static void incrementFromNum(String prefix, int num, int incrementNum){
+	private static List<String> incrementFromNum(String prefix, int num, int incrementNum){
+		
+		List<String> generatedIds= new ArrayList<String>();
 		
 		for(int i = 0; i < incrementNum; i++){
 			num += 1;
@@ -63,7 +67,10 @@ public class GenerateurIdBL {
 			getService().saveGeneratedId(
 					new GeneratedId(patientIdentifiant, false,
 							new Date(), false, Context.getAuthenticatedUser()));
+			generatedIds.add(patientIdentifiant);
 		}
+		
+		return generatedIds;
 	
 	}
 
@@ -75,10 +82,11 @@ public class GenerateurIdBL {
 	 * @param numberToGenerate
 	 *            the number of IDs to generate
 	 */
-	public static void autoGenerateIds(Location location, int numberToGenerate) {
+	public static List<String> autoGenerateIds(Location location, int numberToGenerate) {
 
 		String locationCode = location.getPostalCode();
 		String[] splitCodes = locationCode.split("/");
+		List<String> generatedIds= new ArrayList<String>();
 
 		/*
 		 * Checking if the location is a Site (SIGDEP):
@@ -91,7 +99,7 @@ public class GenerateurIdBL {
 
 			if (getLatestGeneratedId() == null) {
 
-				incrementFromNum(prefix, 0, numberToGenerate);
+				generatedIds = incrementFromNum(prefix, 0, numberToGenerate);
 			}else{
 				/** Here comes the code when it already exists */
 				String latestId = getLatestGeneratedId().getPatientIdentifiant();
@@ -102,13 +110,15 @@ public class GenerateurIdBL {
 				
 				if(getCurrentYear().equals(currYear) && locationCode.equals(locCode)){
 					prefix = locCode + "/" + currYear + "/";
-					incrementFromNum(prefix, latestPatientCode, numberToGenerate);
+					generatedIds = incrementFromNum(prefix, latestPatientCode, numberToGenerate);
 				}else{ // We start from 0 for the current year...
 					prefix = locCode + "/" + getCurrentYear() + "/";
-					incrementFromNum(prefix, 0, numberToGenerate);	
+					generatedIds = incrementFromNum(prefix, 0, numberToGenerate);	
 				}
 			}
 		}
+		
+		return generatedIds;
 	}
 
 	/**
