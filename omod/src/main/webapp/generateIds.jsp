@@ -68,18 +68,82 @@ $sig(document).ready(function(){
 			</div>
 		</div>
 		<br/><hr/>
-		<div style="clear: both;">
+		<div style="clear: both; box-align:center;">
 			<table>
-			  <tr>
-			    <th>#</th>
-			    <th>Generated IDs</th>
-			  </tr>
-			  <c:forEach var="genId" items="${listIds}" varStatus="status">
-				  <tr>
-				    <td><b>${status.count}.</b></td>
-				    <td>${genId}</td>
-				  </tr>
-			  </c:forEach>
+				<tr style="vertical-align: top;">
+					<c:if test="${not empty idsinCol1}">
+						<td>
+							<div>
+								<table>
+								  <tr>
+								    <th></th>
+								    <th>Column 1</th>
+								  </tr>
+								  <c:forEach var="col1" items="${idsinCol1}" varStatus="status">
+									  <tr>
+									    <td></td>
+									    <td>${col1}</td>
+									  </tr>
+								  </c:forEach>
+								</table>
+							</div>
+						</td>
+					</c:if>
+					<c:if test="${not empty idsinCol2}">
+						<td>
+							<div style="border-left-style: solid; border-left-width: 2px; vertical-align: top;">
+								<table>
+								  <tr>
+								    <th></th>
+								    <th>Column 2</th>
+								  </tr>
+								  <c:forEach var="col2" items="${idsinCol2}" varStatus="status">
+									  <tr>
+									    <td></td>
+									    <td>${col2}</td>
+									  </tr>
+								  </c:forEach>
+								</table>
+							</div>
+						</td>
+					</c:if>
+					<c:if test="${not empty idsinCol3}">
+						<td>
+							<div style="border-left-style: solid; border-left-width: 2px; vertical-align: top;">
+								<table>
+								  <tr>
+								    <th></th>
+								    <th>Column 3</th>
+								  </tr>
+								  <c:forEach var="col3" items="${idsinCol3}" varStatus="status">
+									  <tr>
+									    <td></td>
+									    <td>${col3}</td>
+									  </tr>
+								  </c:forEach>
+								</table>
+							</div>
+						</td>
+					</c:if>
+					<c:if test="${not empty idsinCol4}">
+						<td>
+							<div style="border-left-style: solid; border-left-width: 2px; vertical-align: top;">
+								<table>
+								  <tr>
+								    <th></th>
+								    <th>Column 4</th>
+								  </tr>
+								  <c:forEach var="col4" items="${idsinCol4}" varStatus="status">
+									  <tr>
+									    <td></td>
+									    <td>${col4}</td>
+									  </tr>
+								  </c:forEach>
+								</table>
+							</div>
+						</td>
+					</c:if>
+				</tr>
 			</table>
 		</div>
 	</div>

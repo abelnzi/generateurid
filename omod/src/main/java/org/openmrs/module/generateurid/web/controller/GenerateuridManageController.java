@@ -14,6 +14,7 @@
 package org.openmrs.module.generateurid.web.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,8 +55,15 @@ public class GenerateuridManageController {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
+		List<String> generatedIds = GenerateurIdBL.autoGenerateIds(location, numToGenerate);
+		List<List<String>> generatedIdsInCols = GenerateurIdBL.autoGenerateIdsInCol(location, numToGenerate);
 		
-		model.addAttribute("listIds", GenerateurIdBL.autoGenerateIds(location, numToGenerate));
+		model.addAttribute("listIds", generatedIds);
+		model.addAttribute("listIdsinCols", generatedIdsInCols);
+		model.addAttribute("idsinCol1", generatedIdsInCols.get(0));
+		model.addAttribute("idsinCol2", generatedIdsInCols.get(1));
+		model.addAttribute("idsinCol3", generatedIdsInCols.get(2));
+		model.addAttribute("idsinCol4", generatedIdsInCols.get(3));
 		model.addAttribute("location", Context.getLocationService().getLocation(locId));
 		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear("yyyy"));
 		model.addAttribute("currentDate", new Date());
