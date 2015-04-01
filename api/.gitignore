@@ -29,4 +29,12 @@ release.properties
 *.iml
 .DS_Store
 target/
+<<<<<<< HEAD
+>>>>>>> v-1.0.0
+=======
+.project
+.project/
+/.project
+.classpath
+/.classpath
 >>>>>>> v-1.0.0

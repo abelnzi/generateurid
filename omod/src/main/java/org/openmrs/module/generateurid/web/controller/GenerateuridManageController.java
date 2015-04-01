@@ -13,6 +13,9 @@
  */
 package org.openmrs.module.generateurid.web.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -25,6 +28,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * The main controller.
@@ -40,21 +44,42 @@ public class GenerateuridManageController {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		model.addAttribute("location", Context.getLocationService().getLocation(locId));
-		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear());
+		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear("yyyy"));
 		
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String generateId(
+	public void generateId(
             @RequestParam(required=true, value="numToGenerate") Integer numToGenerate,
-            HttpSession session) {
+            HttpSession session, ModelMap model) {
 		
 		Integer locId = Integer.parseInt(Context.getAdministrationService().getGlobalProperty("generateurid.defaultLocation"));
 		Location location = Context.getLocationService().getLocation(locId);
+		List<String> generatedIds = GenerateurIdBL.autoGenerateIds(location, numToGenerate);
+		List<List<String>> generatedIdsInCols = GenerateurIdBL.autoGenerateIdsInCol(location, numToGenerate);
 		
-		GenerateurIdBL.autoGenerateIds(location, numToGenerate);
+		model.addAttribute("listIds", generatedIds);
+		model.addAttribute("listIdsinCols", generatedIdsInCols);
+		model.addAttribute("idsinCol1", generatedIdsInCols.get(0));
+		model.addAttribute("idsinCol2", generatedIdsInCols.get(1));
+		model.addAttribute("idsinCol3", generatedIdsInCols.get(2));
+		model.addAttribute("idsinCol4", generatedIdsInCols.get(3));
+		model.addAttribute("location", Context.getLocationService().getLocation(locId));
+		model.addAttribute("currentYear", GenerateurIdBL.getCurrentYear("yyyy"));
+		model.addAttribute("currentDate", new Date());
 		
-		return "/module/generateurid/generateIds";
+	}
+	
+	public ModelAndView printOutIds(
+            @RequestParam(required=true, value="printIds") String printIds,
+            HttpSession session, ModelMap model) throws Exception {
+
+		ModelAndView mav = new ModelAndView("allGeneratedIdsInPDF");
+		
+		if(printIds != null)
+			mav.addObject("generatedIds", GenerateurIdBL.getLatestGeneratedId());
+
+		return mav;
 	}
 	
 }
