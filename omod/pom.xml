@@ -22,6 +22,11 @@
 			<artifactId>library-name</artifactId> 
 		</dependency> 
 		-->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<type>jar</type>
+		</dependency>
 		
 		<!-- Begin OpenMRS modules -->
 		

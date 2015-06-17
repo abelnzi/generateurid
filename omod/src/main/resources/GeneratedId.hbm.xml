@@ -6,7 +6,7 @@
 <hibernate-mapping package="org.openmrs.module.generateurid">
 
 
-	<class name="GeneratedId" table="${project.parent.artifactId}_generatedId">
+	<class name="GeneratedId" table="generateurid_generatedid">
 		<id name="generatedidId" type="int" column="generatedid_id"	unsaved-value="0">
 			<generator class="native" />
 		</id>

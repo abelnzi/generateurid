@@ -1,0 +1,40 @@
+/target/
+<<<<<<< HEAD
+# Eclipse
+.classpath
+.project
+.settings/*
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/*
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+/target
+=======
+.idea
+.settings/
+.settings
+*.iml
+.DS_Store
+target/
+<<<<<<< HEAD
+>>>>>>> v-1.0.0
+=======
+.project
+.project/
+/.project
+.classpath
+/.classpath
+>>>>>>> v-1.0.0
