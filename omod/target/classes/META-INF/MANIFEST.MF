@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ABEL
 Build-Jdk: 1.7.0_79
-Created-By: Apache Maven 3.2.1
-Archiver-Version: Plexus Archiver
+Built-By: ABEL
+Created-By: Maven Integration for Eclipse
 
